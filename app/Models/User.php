@@ -13,9 +13,13 @@ class User extends Model
         // 获取到用户登录时填写的用户名
         $name = $request->input('name');
         // 通过用户名查询数据库有没有这个用户
+<<<<<<< HEAD
         $ob = $this->where('name',$name)
                    ->where('auth', '=', 3)
                    ->first();
+=======
+        $ob = $this->where('name',$name)->first();
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
         // 如果查出用户，则验证密码
         if($ob){
             //获取用户输入的密码和查数据库得到的密码对比

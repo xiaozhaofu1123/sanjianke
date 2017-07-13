@@ -48,14 +48,22 @@ Route::get('/demo1','admin\UserController@phpinfo');
 // 资源路由
 Route::resource('/user','admin\demoController');
 
+<<<<<<< HEAD
 
 // Route::get('/demo2','admin\AdminController@index');
 
+=======
+//===========模板继承==============
+// Route::get('/demo2','admin\AdminController@index');
+
+Route::resource('users','admin\UsersController');
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
 
 //=============文件上传=============
 
 Route::get('/uploads','admin\UploadsController@index');
 Route::post('/doUploads','admin\UploadsController@doUploads');
+<<<<<<< HEAD
 
 //==================后台登陆==========================
 Route::get('admin/login','admin\LoginController@index');
@@ -65,15 +73,25 @@ Route::post('admin/login','admin\LoginController@doLogin');
 //ajax登录验证
 Route::get('admin/ajax','admin\LoginController@doAjax');
 
+=======
+Route::get('admin/login','admin\LoginController@index');
+
+//==================后台登陆==========================
+Route::post('admin/login','admin\LoginController@doLogin');
+
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
  //===========================此处login为Kernel中被定义的的login==========
 Route::group(['prefix' => 'admin', 'middleware' => 'login'], function(){
     //=============后台首页===========================
     Route::get('/demo2', 'admin\AdminController@index');
+<<<<<<< HEAD
     //===========模板继承,添加用户==============
     Route::resource('users','admin\UsersController');
     //添加验证码
     Route::get('capth2/{tmp}', 'admin\UsersController@capth');
 
+=======
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
     //=============后台退出=============================
     Route::get('/over', 'admin\AdminController@over');
     //=============后台分类===========================
@@ -81,5 +99,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'login'], function(){
     Route::get('typeSon','admin\TypeController@createSon');
 
 });
+<<<<<<< HEAD
 //验证码
+=======
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
 Route::get('admin/capth/{tmp}', 'admin\LoginController@capth');

@@ -19,7 +19,11 @@
                 </script>
             @endif
 
+<<<<<<< HEAD
         <form action="{{url('admin/users')}}" method="post">
+=======
+        <form action="/users" method="post">
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
             {{ csrf_field()}}
             <div class="row">
 
@@ -39,6 +43,7 @@
                 <div class="col-lg-6">
                     <input type="text" class="form-control m-b-10" placeholder="密码" name="pass">
                 </div>
+<<<<<<< HEAD
                 <div class="col-lg-6">
                     <select class="form-control m-b-10" name="auth">
 
@@ -59,6 +64,8 @@
                        <!--  <img src="{{ url('admin/capth/'.time()) }}" onclick="this.src='{{ url('admin/capth') }}/'+Math.random()"> -->
                     </div>
                 </div>
+=======
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                 <div class="col-lg-12">
                      <input type="submit" value="提交" class="btn btn-block btn-alt">
                 </div>
