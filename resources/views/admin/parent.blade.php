@@ -164,8 +164,13 @@
                             <span class="menu-item">用户管理模块</span>
                         </a>
                         <ul class="list-unstyled menu-item">
+<<<<<<< HEAD
                             <li><a href="{{url('admin/users')}}">用户列表</a></li>
                             <li><a href="{{url('admin/users/create')}}">添加用户</a></li>
+=======
+                            <li><a href="/users">用户列表</a></li>
+                            <li><a href="/users/create">添加用户</a></li>
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                             <!-- <li><a href="form-examples.html">Form Examples</a></li>
                             <li><a href="form-validation.html">Form Validation</a></li> -->
                         </ul>

@@ -135,9 +135,12 @@ class TypeController extends Controller
              return redirect('admin/type')->with('error','删除失败');
         }
     }
+<<<<<<< HEAD
 
     public function createSon($id)
     {
         return view('admin.type.addSon');
     }
+=======
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
 }

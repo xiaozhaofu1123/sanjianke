@@ -41,7 +41,11 @@
                 {{ method_field('DELETE') }}
             </form>
             <div class="table-responsive overflow">
+<<<<<<< HEAD
                 <form action="{{url('admin/users')}}">
+=======
+                <form action="/users">
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                     <div class="medio-body">
                         姓名: <input type="text" class="form-control input-sm m-b-10" name="name">
                         性别:<select class="form-control input-sm m-b-10" name="sex">
@@ -53,7 +57,10 @@
                     </div>
                         <input type="submit" value="搜索" class="btn m-b-10" />
                 </form>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                 <table class="table tile">
                     <thead>
                         <tr>
@@ -61,7 +68,10 @@
                             <th>姓名</th>
                             <th>年龄</th>
                             <th>性别</th>
+<<<<<<< HEAD
                             <th>权限</th>
+=======
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                             <th>操作</th>
                         </tr>
                     </thead>
@@ -69,6 +79,7 @@
 
                         @foreach($list as $v)
                             <tr>
+<<<<<<< HEAD
                                 <td><input type="checkbox" name="check[]" value="[]">{{$v->id}}</td>
                                 <td>{{$v->name}}</td>
                                 <td>{{$v->age}}</td>
@@ -89,13 +100,25 @@
                                 <td>
                                     <a class="btn btn-alt m-r-1" href="{{url('admin/users')}}/{{$v->id}}/edit">修改</a> |
                                     <a class="btn btn-alt m-r-1" href="javascript:doDel({{ $v->id }})">删除</a>
+=======
+                                <td><input type="checkbox" name="check[]" value="[]">{{$v->uid}}</td>
+                                <td>{{$v->name}}</td>
+                                <td>{{$v->age}}</td>
+                                <td>{{($v->sex)==1?'男':'女'}}</td>
+                                <td>
+                                    <a class="btn btn-alt m-r-1" href="/users/{{$v->uid}}/edit">修改</a> |
+                                    <a class="btn btn-alt m-r-1" href="javascript:doDel({{ $v->uid }})">删除</a>
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                                 </td>
                             </tr>
                         @endforeach
 
                     </tbody>
                 </table>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                {!! $list->appends($where)->render() !!}
             </div>
             <!-- <div style="width: 100px;height: 50px;">
@@ -106,12 +129,20 @@
             <div style="width: 200px;height: 30px;"></div>
         </div>
         <script type="text/javascript">
+<<<<<<< HEAD
         var url = "{{url('admin/users')}}";
             function doDel(id)
             {
                 if (confirm("你确定删除吗")) {
                     var form = document.myform;
                     form.action = url+'/'+id;
+=======
+            function doDel(uid)
+            {
+                if (confirm("你确定删除吗")) {
+                    var form = document.myform;
+                    form.action = '/users/'+uid;
+>>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                     form.submit();
                 }
             }
