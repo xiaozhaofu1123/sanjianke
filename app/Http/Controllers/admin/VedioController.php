@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 
-class TypeController extends Controller
+class VedioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class TypeController extends Controller
     {
         // dd($request);
         $where = [];
-        $ob = DB::table('movie_type');
+        $ob = DB::table('videos');
         if ($request->has('name')) {
             $name = $request->input('name');
             $where['name'] = $name;
@@ -27,7 +27,7 @@ class TypeController extends Controller
         }
 
         $list=$ob->paginate(10);
-        return view('admin.type.index',['list'=>$list,'where'=>$where]);
+        return view('admin.vedio.index',['list'=>$list,'where'=>$where]);
 
     }
 
@@ -41,7 +41,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('admin.type.add');
+        return view('admin.vedio.add');
     }
 
     /**
@@ -135,12 +135,7 @@ class TypeController extends Controller
              return redirect('admin/type')->with('error','删除失败');
         }
     }
-<<<<<<< HEAD
 
-    public function createSon($id)
-    {
-        return view('admin.type.addSon');
-    }
-=======
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+
+
 }

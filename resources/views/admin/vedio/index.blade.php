@@ -13,7 +13,7 @@
 
         <!-- Deafult Table -->
                 <div class="block-area" id="defaultStyle">
-                    <h3 class="block-title">分类列表</h3>
+                    <h3 class="block-title">视频列表</h3>
                     @if (session('msg'))
                         <div class="alert alert-success">
                             {{ session('msg') }}
@@ -36,7 +36,7 @@
                     <!-- 搜索  -->
                     <form action="/type">
                         <div class='medio-body'>
-                            类别名：<input type="text" class='form-control input-sm m-b-10' name='name'>
+                            视频名：<input type="text" class='form-control input-sm m-b-10' name='name'>
                         </div>
                         <input type="submit" class='btn m-b-10' value='搜索'>
                     </form>
@@ -44,9 +44,11 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>类别名</th>
-                                <th>路径</th>
-                                <th>父id</th>
+                                <th>视频名</th>
+                                <th>视频类别</th>
+                                <th>视频地址</th>
+                                <th>视频描述</th>
+                                <th>视频观看</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
@@ -55,12 +57,14 @@
                                 <tr>
                                     <td>{{ $v->id }}</td>
                                     <td>{{ $v->name }}</td>
-                                    <td>{{ $v->path }}</td>
-                                    <td>{{ $v->upid }}</td>
+                                    <td>{{ $v->vid }}</td>
+                                    <td><a href="{{ $v->path }}">{{ $v->path }}</a></td>
+                                    <td>{{ $v->status}}</td>
+                                    <td><video src="{{ $v->path }}" style="width: 100px;height: 50px;" controls></video></td>
                                     <td>
                                         <a class="btn m-r-5" href='javascript:doDel({{ $v->id }})'>删除</a>
-                                        <a class="btn m-r-5" href='{{ url("admin/type")."/".$v->id }}/edit'>修改</a>
-                                        <a class="btn m-r-5" href='{{ url("admin/typeSon")."/".$v->id }}'>添加子分类</a>
+                                        <a class="btn m-r-5" href='{{ url("admin/vedio")."/".$v->id }}/edit'>修改</a>
+
                                     </td>
                                 </tr>
                             @endforeach

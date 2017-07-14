@@ -77,7 +77,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'login'], function(){
     //=============后台退出=============================
     Route::get('/over', 'admin\AdminController@over');
     //=============后台分类===========================
-    Route::resource('/type','admin\TypeController');
+    Route::resource('/vedio','admin\VedioController');
     Route::get('typeSon','admin\TypeController@createSon');
 
 });
