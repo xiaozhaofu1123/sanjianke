@@ -8,7 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
 
-class VedioController extends Controller
+class VideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,14 +19,21 @@ class VedioController extends Controller
     {
         // dd($request);
         $where = [];
-        $ob = DB::table('videos');
+        //多表联查,用join
+        $pro = DB::table('videos')
+                    ->join('types', 'videos.vid', '=', 'types.id')
+                    ->select('videos.*',  'types.type');
+
         if ($request->has('name')) {
             $name = $request->input('name');
             $where['name'] = $name;
-            $ob->where('name', 'like', '%'.$name.'%');
+            //注意'videos.name',而不能用name
+            $pro->where('videos.name', 'like', '%'.$name.'%');
         }
 
-        $list=$ob->paginate(10);
+        $list = $pro->paginate(5);
+        // dd($list); $list的值
+
         return view('admin.vedio.index',['list'=>$list,'where'=>$where]);
 
     }
@@ -41,7 +48,9 @@ class VedioController extends Controller
      */
     public function create()
     {
-        return view('admin.vedio.add');
+        $time = time();
+        // dd($time);
+        return view('admin.vedio.add',['time'=>$time]);
     }
 
     /**
@@ -64,9 +73,10 @@ class VedioController extends Controller
             ],$messages);
 
         $arr = $request->except('_token');
-       $id =  DB::table('movie_type')->insertGetId($arr);
+       $id =  DB::table('videos')->insertGetId($arr);
+       // $time=time();
        if ($id > 0) {
-           return redirect('/admin/type')->with('msg','添加成功');
+           return redirect('/admin/video')->with('msg','添加成功');
        }
 
     }
@@ -98,8 +108,10 @@ class VedioController extends Controller
      */
     public function edit($id)
     {
-        $type = DB::table('movie_type')->where('id',$id)->first();
-        return view('admin.type.edit',['type'=>$type]);
+        // dd($id);
+        $type = DB::table('videos')->where('id',$id)->first();
+        // dd($type);
+        return view('admin.vedio.edit',['type'=>$type]);
     }
 
     /**
@@ -111,12 +123,15 @@ class VedioController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($id);
         $arr = $request->except('_token','_method');
-        $res = DB::table('movie_type')->where('id',$id)->update($arr);
+        // dd($arr);
+        $res = DB::table('videos')->where('id',$id)->update($arr);
+        // dd($res);
         if ($res > 0) {
-            return redirect('admin/type')->with('msg','修改成功');
+            return redirect('admin/video')->with('msg','修改成功');
         }else{
-             return redirect('admin/type')->with('error','修改失败');
+             return redirect('admin/video')->with('error','修改失败');
         }
     }
 
@@ -128,11 +143,24 @@ class VedioController extends Controller
      */
     public function destroy($id)
     {
-        $res = DB::table('movie_type')->where('id',$id)->delete();
+        $res = DB::table('videos')->where('id',$id)->delete();
         if ($res > 0) {
-            return redirect('admin/type')->with('msg','删除成功');
+            return redirect('admin/video')->with('msg','删除成功');
         }else{
-             return redirect('admin/type')->with('error','删除失败');
+             return redirect('admin/video')->with('error','删除失败');
+        }
+    }
+
+    public function del(Request $request)
+    {
+        // dd($request);
+        $arr = $request->input('check');
+          // dd($arr);
+        $res = DB::table('videos')->whereIn('id',$arr)->delete();
+        if ($res > 0) {
+            return redirect('admin/video')->with('msg','删除成功');
+        }else{
+             return redirect('admin/video')->with('error','删除失败');
         }
     }
 

@@ -26,15 +26,9 @@
 
             <div class="clearfix"></div>
 
-<<<<<<< HEAD
             <!-- 登录提交 -->
             <form class="box tile animated active" id="box-login" action='{{ url("admin/login") }}' method="post">
                 {{ csrf_field()}}
-=======
-            <!-- Login -->
-            <form class="box tile animated active" id="box-login" action='{{ url("admin/login") }}' method="post">
-            {{ csrf_field()}}
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
                 <h2 class="m-t-0 m-b-15">
                     @if (session('msg'))
                         <div class="alert alert-success">
@@ -116,7 +110,6 @@
         <!-- All JS functions -->
         <script src="{{ asset('admin/js/functions.js') }}"></script>
     </body>
-<<<<<<< HEAD
 
     <script >
 
@@ -157,6 +150,4 @@
 
         });
     </script>
-=======
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
 </html>

@@ -71,14 +71,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'login'], function(){
     Route::get('/demo2', 'admin\AdminController@index');
     //===========模板继承,添加用户==============
     Route::resource('users','admin\UsersController');
+    //用户批量删除
+    Route::post('usersdel','admin\UsersController@del');
     //添加验证码
     Route::get('capth2/{tmp}', 'admin\UsersController@capth');
 
     //=============后台退出=============================
     Route::get('/over', 'admin\AdminController@over');
     //=============后台分类===========================
-    Route::resource('/vedio','admin\VedioController');
-    Route::get('typeSon','admin\TypeController@createSon');
+    Route::resource('/video','admin\VideoController');
+    Route::post('videodel', 'admin\VideoController@del');
+
 
 });
 //验证码

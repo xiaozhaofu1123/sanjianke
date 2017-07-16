@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-use Gregwar\Captcha\CaptchaBuilder;
-=======
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
-use DB;
 
+use Gregwar\Captcha\CaptchaBuilder;
+
+use DB;
+use Intervention\Image\ImageManagerStatic as Image;
 class UsersController extends Controller
 {
     /**
@@ -35,7 +34,8 @@ class UsersController extends Controller
             $where['sex'] = $sex;
             $ob->where('sex', $sex);
         }
-        $list=$ob->paginate(10);
+        $list=$ob->paginate(5);
+         // dd($list);
         return view('admin.user.index',['list'=>$list,'where'=>$where]);
 
     }
@@ -61,7 +61,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-<<<<<<< HEAD
+
          // dd($request);
 
 
@@ -74,8 +74,7 @@ class UsersController extends Controller
             //不一致则跳转回上一页
             return back()->with('msg', '添加失败：验证码错误');
         }
-=======
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+
 
         $messages = [
             'name.required' => '请输入用户名',
@@ -89,18 +88,15 @@ class UsersController extends Controller
                 'age' => 'required|integer|min:0',
             ],$messages);
 
-<<<<<<< HEAD
+
         $arr = $request->except(['_token','mycode']);
         //insertGetId数据库里插入的方法,返回插入的数据的id,若数据表有自动递增的 id，则可使用 insertGetId 方法来插入记录并获取其 ID
        $id =  DB::table('user')->insertGetId($arr);
        if ($id > 0) {
            return redirect('admin/users')->with('msg','添加成功');
-=======
-        $arr = $request->except('_token');
-       $id =  DB::table('user')->insertGetId($arr);
-       if ($id > 0) {
-           return redirect('/users')->with('msg','添加成功');
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+
+
+
        }
 
     }
@@ -132,11 +128,9 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-<<<<<<< HEAD
+
         $user = DB::table('user')->where('id',$id)->first();
-=======
-        $user = DB::table('user')->where('uid',$id)->first();
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+
         return view('admin.user.edit',['user'=>$user]);
     }
 
@@ -149,20 +143,37 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+  // dd($request);
         $arr = $request->except('_token','_method');
-<<<<<<< HEAD
+        // dd($arr);
+        if ($request->hasFile('photo')) {
+            //
+            //判断文件是否有效
+            if ($request->file('photo')->isValid()) {
+                //生成上传文件对象
+                $file = $request->file('photo');
+                // dd($file);
+                //获取上传的源文件的后缀名
+                $ext = $file->getClientOriginalExtension();
+                // dd($ext);
+                //定义一个新的文件名
+                $filename = time().rand(1000,9999).'.'.$ext;
+                //执行上传,移动文件
+                // dd($filename);
+                $file->move('./admin/upload', $filename);
+                //改变photo中的值
+                $arr['photo']=$filename;
+
+
+            }
+         }
+
         $res = DB::table('user')->where('id',$id)->update($arr);
         if ($res > 0) {
             return redirect('admin/users')->with('msg','修改成功');
         }else{
              return redirect('admin/users')->with('error','修改失败');
-=======
-        $res = DB::table('user')->where('uid',$id)->update($arr);
-        if ($res > 0) {
-            return redirect('/users')->with('msg','修改成功');
-        }else{
-             return redirect('/users')->with('error','修改失败');
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+
         }
     }
 
@@ -172,10 +183,24 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
-<<<<<<< HEAD
+        dd($request->except('_token','_method'));
         $res = DB::table('user')->where('id',$id)->delete();
+        if ($res > 0) {
+            return redirect('admin/users')->with('msg','删除成功');
+        }else{
+             return redirect('admin/users')->with('error','删除失败');
+        }
+    }
+
+    public function del(Request $request)
+    {
+        // dd($request->except('_token'));
+        $data = $request->input('check');
+        // dd($data);
+        $res = DB::table('user')->whereIn('id',$data)->delete();
+        // dd($res);
         if ($res > 0) {
             return redirect('admin/users')->with('msg','删除成功');
         }else{
@@ -200,13 +225,7 @@ class UsersController extends Controller
         // header('Content-Type: image/jpeg');
         return response($builder->output())->header('Content-type', 'image/jpeg');
     }
-=======
-        $res = DB::table('user')->where('uid',$id)->delete();
-        if ($res > 0) {
-            return redirect('/users')->with('msg','删除成功');
-        }else{
-             return redirect('/users')->with('error','删除失败');
-        }
-    }
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+
+
+
 }

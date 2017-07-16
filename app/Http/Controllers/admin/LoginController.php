@@ -16,9 +16,14 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.login');
+        if ($request->session()->has('adminuser')) {
+            return redirect('admin/demo2');
+        }else{
+           return view('admin.login');
+        }
+
     }
 
     public function doLogin(Request $request)
@@ -42,11 +47,7 @@ class LoginController extends Controller
             return redirect('admin/demo2');
         }else{
             //登录失败则跳转回上一页
-<<<<<<< HEAD
             return redirect('admin/login')->with('msg', '登录失败：用户名或密码错误');
-=======
-            return back()->with('msg', '登录失败：用户名或密码错误');
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
         }
     }
 
@@ -69,7 +70,6 @@ class LoginController extends Controller
     }
 
 
-<<<<<<< HEAD
     //ajax验证
     public function doAjax(Request $request)
     {
@@ -92,6 +92,3 @@ class LoginController extends Controller
     }
 }
 
-=======
-}
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8

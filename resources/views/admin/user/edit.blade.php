@@ -6,11 +6,8 @@
             <p>请输入用户信息</p>
 
 
-<<<<<<< HEAD
-        <form action="{{url('admin/users')}}/{{$user->id}}" method="post">
-=======
-        <form action="/users/{{$user->uid}}" method="post">
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+        <form action="{{url('admin/users')}}/{{$user->id}}" method="post" enctype="multipart/form-data">
+
             {{ csrf_field() }}
             {{ method_field('PUT') }}
             <div class="row">
@@ -28,10 +25,10 @@
                         <option value='2' @if($user->sex == 2)selected @endif>女</option>
                     </select>
                 </div>
-                <div class="col-lg-6">
+                <!-- <div class="col-lg-6">
                     <input type="text" class="form-control m-b-10" placeholder="密码" name="pass" value="{{ $user->pass }}">
                 </div>
-<<<<<<< HEAD
+ -->
                 <div class="col-lg-6">
                         <select class="form-control m-b-10" name="auth" value="{{ $user->auth }}">
                             <option value='0' @if($user->auth == 0)selected @endif>普通用户</option>
@@ -39,9 +36,23 @@
                             <option value='2' @if($user->auth == 2)selected @endif>广告用户</option>
                             <option value='3' @if($user->auth == 3)selected @endif>管理员</option>
                         </select>
-                    </div>
-=======
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+                </div>
+
+                <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <!-- 加载默认图片 -->
+                                        <div class="fileupload-preview thumbnail form-control"><img src="{{url('admin/upload')}}/{{$user->photo}}"></div>
+
+                                        <div>
+                                            <span class="btn btn-file btn-alt btn-sm">
+                                                <span class="fileupload-new">选择图片</span>
+                                                <span class="fileupload-exists">更改</span>
+                                                <input type="file" name="photo" >
+
+                                            </span>
+                                            <a href="#" class="btn fileupload-exists btn-sm" data-dismiss="fileupload">移除</a>
+                                        </div>
+                </div>
+
                 <div class="col-lg-12">
                      <input type="submit" value="提交" class="btn btn-block btn-alt">
                 </div>

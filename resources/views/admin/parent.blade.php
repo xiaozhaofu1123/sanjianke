@@ -24,7 +24,7 @@
 
         <header id="header" class="media">
             <a href="" id="menu-toggle"></a>
-            <a class="logo pull-left" href="index.html">SUPER ADMIN 1.0</a>
+            <a class="logo pull-left" href="index.html">三剑客</a>
 
             <div class="media-body">
                 <div class="media" id="top-menu">
@@ -155,12 +155,13 @@
                 <ul class="list-unstyled side-menu">
                     <li class="active">
                         <a class="sa-side-home" href="index.html">
-                            <span class="menu-item">Dashboard</span>
+                            <span class="menu-item"> <li><a href="{{url('admin/demo2')}}">首页</a></li></span>
                         </a>
                     </li>
 
                     <li class="dropdown">
                         <a class="sa-side-form" href="">
+
                             <span class="menu-item">用户管理模块</span>
                         </a>
                         <ul class="list-unstyled menu-item">
@@ -170,22 +171,25 @@
 
 
 
-                            <!-- <li><a href="form-examples.html">Form Examples</a></li>
+                           <!--   <li><a href="form-examples.html">Form Examples</a></li>
                             <li><a href="form-validation.html">Form Validation</a></li> -->
                         </ul>
+
                     </li>
+                     <li><a href="">用户</a></li>
 
                     <li class="dropdown">
                         <a class="sa-side-form" href="">
                             <span class="menu-item">视频观看</span>
                         </a>
                         <ul class="list-unstyled menu-item">
-                            <li><a href="{{ url('admin/vedio')}}">视频列表</a></li>
-                            <li><a href="{{ url('admin/vedio/create')}}">添加视频</a></li>
+                            <li><a href="{{ url('admin/video')}}">视频列表</a></li>
+                            <li><a href="{{ url('admin/video/create')}}">添加视频</a></li>
                             <!-- <li><a href="form-examples.html">Form Examples</a></li>
                             <li><a href="form-validation.html">Form Validation</a></li> -->
                         </ul>
                     </li>
+                     <li><a href="">视频</a></li>
 
                 </ul>
 

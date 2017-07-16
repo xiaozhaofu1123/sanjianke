@@ -25,9 +25,9 @@
                                 </span>
                                 <a href="#" class="btn fileupload-exists btn-sm" data-dismiss="fileupload">移除</a>
                             </div>
-                        </div>
+    </div>
                       <input type="submit" class="btn btn-xm btn-alt m-r-5" value="上传">
-                        </form>
+    </form>
         </div>
         @endsection
 

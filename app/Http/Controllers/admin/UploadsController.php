@@ -24,7 +24,7 @@ class UploadsController extends Controller
     public function doUploads(Request $request)
     {
 
-
+        dd($request);
         //=================单图上传====================
         //判断是否有文件上传
         if ($request->hasFile('mypic')) {

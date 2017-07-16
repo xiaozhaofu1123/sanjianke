@@ -19,7 +19,7 @@
                 </script>
             @endif
 
-        <form action="{{url('admin/vedio')}}" method="post">
+        <form action="{{url('admin/video')}}" method="post">
             {{ csrf_field()}}
             <div class="row">
 
@@ -28,11 +28,18 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <select class="form-control m-b-10" name="type">
+                    <select class="form-control m-b-10" name="vid">
                         <option  value="">--视频分类--</option>
-                        <option  value="1">科幻</option>
-                        <option  value="2">武侠</option>
-                        <option  value="3">爱情</option>
+                        <option  value="13">院线</option>
+                        <option  value="14">喜剧</option>
+                        <option  value="15">剧情</option>
+                        <option  value="16">动作</option>
+                        <option  value="17">犯罪</option>
+                        <option  value="18">冒险</option>
+                        <option  value="19">恐怖</option>
+                        <option  value="20">科幻</option>
+                        <option  value="21">奇幻</option>
+
                     </select>
                 </div>
                 <div class="col-lg-6">
@@ -40,7 +47,12 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <input type="text" class="form-control m-b-10" name="upid" placeholder="视频描述">
+                    <input type="text" class="form-control m-b-10" name="status" placeholder="视频描述">
+                </div>
+
+                <div class="col-lg-6">
+
+                    <input type="hidden" class="form-control m-b-10" name="updata_time" placeholder="视频描述" value="{{time()}}">
                 </div>
                 <div class="col-lg-12">
                      <input type="submit" value="提交" class="btn btn-block btn-alt">

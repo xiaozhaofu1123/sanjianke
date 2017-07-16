@@ -19,11 +19,10 @@
                 </script>
             @endif
 
-<<<<<<< HEAD
+
         <form action="{{url('admin/users')}}" method="post">
-=======
-        <form action="/users" method="post">
->>>>>>> ed9b2f2d9d2e05f8014e11e385e551412c6c7ad8
+
+
             {{ csrf_field()}}
             <div class="row">
 
