@@ -18,6 +18,7 @@ class LoginController extends Controller
      */
     public function index(Request $request)
     {
+        //防止登录之后再重复登录
         if ($request->session()->has('adminuser')) {
             return redirect('admin/demo2');
         }else{

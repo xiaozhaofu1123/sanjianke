@@ -78,9 +78,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'login'], function(){
 
     //=============后台退出=============================
     Route::get('/over', 'admin\AdminController@over');
-    //=============后台分类===========================
+    //=============后台视频分类===========================
     Route::resource('/video','admin\VideoController');
     Route::post('videodel', 'admin\VideoController@del');
+
+
+    //=============后台分类===========================
+    Route::resource('/type','admin\TypeController');
+    //=============后台子分类===========================
+    Route::get('typeSon/{id}','admin\TypeController@createSon');
+    Route::post('typeSon','admin\TypeController@doAddSon');
+    // =============广告分类=============================
+    Route::resource('/adv','admin\AdvController');
+    //后台友情链接
+    Route::resource('/link','admin\LinkController');
 
 
 });

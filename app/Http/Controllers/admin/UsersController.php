@@ -62,42 +62,52 @@ class UsersController extends Controller
     public function store(Request $request)
     {
 
-         // dd($request);
+          // dd($request);
 
 
         // 获取session中的验证码
         $mycode = session('mycode');
         // dd($mycode);
-         // dd($request->input('mycode'));
+        $code = $request->input('mycode');
+
+         // dd($code);
+
+
         //判断session中的验证码和用户输入的验证码是否一致
-        if($mycode != $request->input('mycode')){
-            //不一致则跳转回上一页
-            return back()->with('msg', '添加失败：验证码错误');
+        if($mycode == $code){
+
+             $messages = [
+                 'name.required' => '请输入用户名',
+                 'age.required'  => '请输入年龄',
+                 'age.integer'  => '年龄必须为整数',
+                 'age.min'  => '年龄必须为正整数',
+                 'mycode.required' => '验证码不能为空',
+
+             ];
+
+             $this->validate($request, [
+                     'name' => 'required',
+                     'age' => 'required|integer|min:0',
+                     'mycode'=>'required',
+                 ],$messages);
+
+
+             $arr = $request->except(['_token','mycode']);
+             //insertGetId数据库里插入的方法,返回插入的数据的id,若数据表有自动递增的 id，则可使用 insertGetId 方法来插入记录并获取其 ID
+            $id =  DB::table('user')->insertGetId($arr);
+            if ($id > 0) {
+                return redirect('admin/users')->with('msg','添加成功');
+
+
+
+            }
+        }else{
+             //不一致则跳转回上一页
+            return redirect('admin/users/create')->with('msg', '添加失败：验证码错误');
+
         }
 
 
-        $messages = [
-            'name.required' => '请输入用户名',
-            'age.required'  => '请输入年龄',
-            'age.integer'  => '年龄必须为整数',
-            'age.min'  => '年龄必须为正整数',
-        ];
-
-        $this->validate($request, [
-                'name' => 'required',
-                'age' => 'required|integer|min:0',
-            ],$messages);
-
-
-        $arr = $request->except(['_token','mycode']);
-        //insertGetId数据库里插入的方法,返回插入的数据的id,若数据表有自动递增的 id，则可使用 insertGetId 方法来插入记录并获取其 ID
-       $id =  DB::table('user')->insertGetId($arr);
-       if ($id > 0) {
-           return redirect('admin/users')->with('msg','添加成功');
-
-
-
-       }
 
     }
 

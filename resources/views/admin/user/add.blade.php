@@ -19,6 +19,17 @@
                 </script>
             @endif
 
+            @if (session('msg'))
+                <div class="alert alert-danger">
+                    {{ session('msg') }}
+                        <script type="text/javascript">
+                        setTimeout(function(){
+                                location.href = location.href;
+                        },2000)
+                        </script>
+                </div>
+            @endif
+
 
         <form action="{{url('admin/users')}}" method="post">
 

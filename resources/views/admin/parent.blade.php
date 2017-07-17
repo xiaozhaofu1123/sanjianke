@@ -191,6 +191,50 @@
                     </li>
                      <li><a href="">视频</a></li>
 
+
+                     <li class="dropdown">
+                         <a class="sa-side-form" href="">
+                             <span class="menu-item">分类管理模块</span>
+                         </a>
+                         <ul class="list-unstyled menu-item">
+                             <li><a href="{{ url('admin/type')}}">分类列表</a></li>
+                             <li><a href="{{ url('admin/type/create')}}">添加分类</a></li>
+                             <!-- <li><a href="form-examples.html">Form Examples</a></li>
+                             <li><a href="form-validation.html">Form Validation</a></li> -->
+                         </ul>
+                     </li>
+                     <li><a href="">分类</a></li>
+
+
+
+                     <li class="dropdown">
+                         <a class="sa-side-form" href="">
+                             <span class="menu-item">广告管理模块</span>
+                         </a>
+                         <ul class="list-unstyled menu-item">
+                             <li><a href="{{ url('admin/adv')}}">广告列表</a></li>
+                             <li><a href="{{ url('admin/adv/create')}}">添加广告</a></li>
+                             <!-- <li><a href="form-examples.html">Form Examples</a></li>
+                             <li><a href="form-validation.html">Form Validation</a></li> -->
+                         </ul>
+                     </li>
+                     <li><a href="">广告</a></li>
+
+                     <li class="dropdown">
+                          <a class="sa-side-form" href="">
+                          <span class="menu-item">友情链接</span>
+                          </a>
+                          <ul class="list-unstyled menu-item">
+                         <li><a href="{{url('admin/link')}}">友情链接列表</a></li>
+                          <li><a href="{{url('admin/link/create')}}">添加友情链接</a></li>
+
+                          </ul>
+                      </li>
+                      <li><a href="">友情链接</a></li>
+
+
+
+
                 </ul>
 
             </aside>
