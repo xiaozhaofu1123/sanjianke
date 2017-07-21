@@ -52,7 +52,7 @@
 
                 <div class="col-lg-6">
 
-                    <input type="hidden" class="form-control m-b-10" name="updata_time" placeholder="视频描述" value="{{time()}}">
+                    <input type="hidden" class="form-control m-b-10" name="updata_time" placeholder="添加时间" value="{{time()}}">
                 </div>
                 <div class="col-lg-12">
                      <input type="submit" value="提交" class="btn btn-block btn-alt">

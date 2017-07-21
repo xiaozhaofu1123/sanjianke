@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Hash;
 
 class User extends Model
 {
     protected $table = 'user';
+    protected $primaryKey = 'id';
 
    public function index($request)
    {
@@ -20,8 +22,10 @@ class User extends Model
 
         // 如果查出用户，则验证密码
         if($ob){
-            //获取用户输入的密码和查数据库得到的密码对比
-            if($request->input('pass') == $ob->pass){
+            if (Hash::check($request->input('pass'), $ob->pass))
+             {
+                //获取用户输入的密码和查数据库得到的密码对比
+
                 //返回用户信息
                 return $ob;
             }else{

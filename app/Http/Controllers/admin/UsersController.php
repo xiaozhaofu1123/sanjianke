@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use Gregwar\Captcha\CaptchaBuilder;
 
 use DB;
+use Hash;
 use Intervention\Image\ImageManagerStatic as Image;
 class UsersController extends Controller
 {
@@ -91,8 +92,11 @@ class UsersController extends Controller
                      'mycode'=>'required',
                  ],$messages);
 
+             $arr['pass']=Hash::make($request->pass);
 
              $arr = $request->except(['_token','mycode']);
+              $arr['pass']=Hash::make($request->pass);
+              // dd($arr);
              //insertGetId数据库里插入的方法,返回插入的数据的id,若数据表有自动递增的 id，则可使用 insertGetId 方法来插入记录并获取其 ID
             $id =  DB::table('user')->insertGetId($arr);
             if ($id > 0) {
@@ -155,7 +159,8 @@ class UsersController extends Controller
     {
   // dd($request);
         $arr = $request->except('_token','_method');
-        // dd($arr);
+         // dd($arr);
+        //修改上传用户头像
         if ($request->hasFile('photo')) {
             //
             //判断文件是否有效
@@ -175,8 +180,11 @@ class UsersController extends Controller
                 $arr['photo']=$filename;
 
 
+
             }
          }
+         // dd($arr);
+         $arr['pass']=Hash::make($request->pass);
 
         $res = DB::table('user')->where('id',$id)->update($arr);
         if ($res > 0) {

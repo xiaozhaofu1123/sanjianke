@@ -38,6 +38,10 @@
                         </select>
                 </div>
 
+                <div class="col-lg-6">
+                    <input type="text" class="form-control m-b-10" placeholder="密码" name="pass" value="{{ $user->pass }}">
+                </div>
+
                 <div class="fileupload fileupload-new" data-provides="fileupload">
                                         <!-- 加载默认图片 -->
                                         <div class="fileupload-preview thumbnail form-control"><img src="{{url('admin/upload')}}/{{$user->photo}}"></div>

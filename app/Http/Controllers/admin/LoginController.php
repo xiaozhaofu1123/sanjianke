@@ -29,6 +29,7 @@ class LoginController extends Controller
 
     public function doLogin(Request $request)
     {
+        // dd($request->pass);
         // 获取session中的验证码
         $mycode = session('mycode');
         //判断session中的验证码和用户输入的验证码是否一致
@@ -39,13 +40,16 @@ class LoginController extends Controller
 
         //实例化一个模型,上面已经use了
         $user = new User();
+
         //调用模型中的index验证用户登录
         $ob = $user->index($request);
         if($ob){
-            //如果用户登录成功，保存用户登录信息
+
+                //如果用户登录成功，保存用户登录信息
             session(['adminuser'=>$ob]);
             //跳转到后台首页
             return redirect('admin/demo2');
+
         }else{
             //登录失败则跳转回上一页
             return redirect('admin/login')->with('msg', '登录失败：用户名或密码错误');
@@ -74,7 +78,7 @@ class LoginController extends Controller
     //ajax验证
     public function doAjax(Request $request)
     {
-         // dd($request);
+
         $user = new User();
         //获取输入的用户名
         $name = $request->input('name');

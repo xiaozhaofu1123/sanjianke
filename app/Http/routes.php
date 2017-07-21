@@ -11,25 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('/test', function () {
-    return 'hello get提交';
-});
 
-Route::post('/test', function () {
-    return 'hello post提交';
-});
-
-Route::put('/test', function () {
-    return 'hello put提交';
-});
-
-Route::delete('/test',function() {
-    return 'hello delete提交';
-});
 
 //多种请求路由
 Route::match(['get','post','put'], '/aa', function () {
@@ -97,3 +80,35 @@ Route::group(['prefix' => 'admin', 'middleware' => 'login'], function(){
 });
 //验证码
 Route::get('admin/capth/{tmp}', 'admin\LoginController@capth');
+
+
+
+
+
+
+//==============前台首页================
+
+Route::get('/', function () {
+    return view('home/index');
+});
+//==========前台注册============================
+Route::group(['prefix'=>'home'],function(){
+    Route::resource('register', 'home\RegisterController@index');
+    Route::resource('registeruser', 'home\RegisterController');
+    Route::post('/send', 'home\RegisterController@send');
+    Route::get('/mail', 'home\RegisterController@mail');
+    Route::get('/phone', 'home\RegisterController@phone');
+    //邮箱注册验证
+    Route::any('/validate_email', 'home\ValidateController@validateEmail');
+    Route::any('/ajax', 'home\RegisterController@doAjax');
+    Route::any('/confirmajax', 'home\RegisterController@confirmAjax');
+    //手机号码验证
+    Route::any('/phoneajax', 'home\RegisterController@dophoneAjax');
+
+    // 手机号码注册
+    Route::any('/phonecode', 'home\RegisterController@phoneCode');
+    Route::post('/phoneregister', 'home\RegisterController@phoneRegister');
+
+
+
+});
