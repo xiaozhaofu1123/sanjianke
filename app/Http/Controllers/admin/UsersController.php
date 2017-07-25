@@ -100,6 +100,15 @@ class UsersController extends Controller
              //insertGetId数据库里插入的方法,返回插入的数据的id,若数据表有自动递增的 id，则可使用 insertGetId 方法来插入记录并获取其 ID
             $id =  DB::table('user')->insertGetId($arr);
             if ($id > 0) {
+
+                //=========操作日志===========
+                 $name = session('adminuser')->name;
+                $userid = session('adminuser')->id;
+                // dd($id);
+                $content = $name.'添加用户'.$id;
+
+                insertlog($userid,'添加','用户管理',$content);
+                //============操作日志结束=============
                 return redirect('admin/users')->with('msg','添加成功');
 
 
@@ -115,13 +124,6 @@ class UsersController extends Controller
 
     }
 
-    // public function messages()
-    // {
-    //     return [
-    //         'name.required' => '请输入用户名',
-    //         'age.required'  => '请输入年龄',
-    //     ];
-    // }
 
     /**
      * Display the specified resource.
@@ -188,6 +190,13 @@ class UsersController extends Controller
 
         $res = DB::table('user')->where('id',$id)->update($arr);
         if ($res > 0) {
+
+            //==========修改日志===============
+            $name = session('adminuser')->name;
+            $userid = session('adminuser')->id;
+            $content = $name.'修改用户'.$id;
+            insertlog($userid,'修改','用户管理',$content);
+            //==========================================
             return redirect('admin/users')->with('msg','修改成功');
         }else{
              return redirect('admin/users')->with('error','修改失败');
@@ -203,9 +212,16 @@ class UsersController extends Controller
      */
     public function destroy(Request $request,$id)
     {
-        dd($request->except('_token','_method'));
+        // dd($request->except('_token','_method'));
         $res = DB::table('user')->where('id',$id)->delete();
         if ($res > 0) {
+
+            //========操作日志===========
+            $name = session('adminuser')->name;
+            $userid = session('adminuser')->id;
+            $content = $name.'删除用户'.$id;
+            insertlog($userid,'删除','用户管理',$content);
+            //=========================================
             return redirect('admin/users')->with('msg','删除成功');
         }else{
              return redirect('admin/users')->with('error','删除失败');
@@ -217,9 +233,19 @@ class UsersController extends Controller
         // dd($request->except('_token'));
         $data = $request->input('check');
         // dd($data);
+
         $res = DB::table('user')->whereIn('id',$data)->delete();
         // dd($res);
         if ($res > 0) {
+            foreach ($data as $k => $v) {
+            $id = $v;
+            //============删除日志=============
+            $name = session('adminuser')->name;
+            $userid = session('adminuser')->id;
+            $content = $name.'删除用户'.$id;
+            insertlog($userid,'删除','用户管理',$content);
+        }
+
             return redirect('admin/users')->with('msg','删除成功');
         }else{
              return redirect('admin/users')->with('error','删除失败');

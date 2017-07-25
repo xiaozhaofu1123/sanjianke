@@ -32,3 +32,6 @@ $compiledPath = __DIR__.'/cache/compiled.php';
 if (file_exists($compiledPath)) {
     require $compiledPath;
 }
+
+require  __DIR__.'/array.php';  //引入自定义函数库
+

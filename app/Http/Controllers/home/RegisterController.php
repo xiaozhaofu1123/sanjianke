@@ -239,7 +239,7 @@ class RegisterController extends Controller
          $m3_email->cc = 'xiaozhaofu@163.com';
          $m3_email->subject = '三剑客视频验证';
          $m3_email->content = '请于24小时点击该链接完成验证.http://47.94.215.115/home/validate_email'. '?uid=' . $user->id
-                            . '&code=' . $uuid;
+                    . '&code=' . $uuid;
 
 
         $tempEmail = new TempEmail;
@@ -263,6 +263,13 @@ class RegisterController extends Controller
     }
 
 
+
+
+
+
+
+
+    //=====================手机短信注册========================================
     public function phoneCode(Request $request)
     {
          // dd($request);
@@ -359,13 +366,15 @@ class RegisterController extends Controller
         if ($request->yzm != session('code')) {
             return redirect('home/phone')->with('error', '验证码错误,请重新输入');
         }
-         $arr = $request->only('phone','pass');
+          $arr = $request->only('phone','pass');
+          $arr['pass']=Hash::make($request->input('pass',''));
+          $id = DB::table('user')->insertGetId($arr);
 
-
-        $user = new User;
-        $user->phone = $request->input('phone','');
-        $user->pass =Hash::make($request->input('pass',''));
-        $id = $user->save();
+        // $user = new User;
+        // $user->phone = $request->input('phone');
+        // // dd($user->phone);
+        // $user->pass =Hash::make($request->input('pass',''));
+        // $id = $user->save();
         if ($id) {
             return redirect('/')->with('msg', '注册成功,请登录');
         }

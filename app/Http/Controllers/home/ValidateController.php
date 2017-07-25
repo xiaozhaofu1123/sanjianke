@@ -76,7 +76,7 @@ class ValidateController extends Controller
       if(time() > strtotime($tempEmail->timeline)) {
         return '该链接已失效';
       }
-
+    //===========邮箱字段添加,即激活==================
       $user = User::find($uid);
       $user->active = 1;
       $user->save();

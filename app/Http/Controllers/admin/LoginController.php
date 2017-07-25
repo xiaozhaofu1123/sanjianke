@@ -45,8 +45,18 @@ class LoginController extends Controller
         $ob = $user->index($request);
         if($ob){
 
+
                 //如果用户登录成功，保存用户登录信息
             session(['adminuser'=>$ob]);
+
+            //=========操作日志===========
+             $name = session('adminuser')->name;
+            $id = session('adminuser')->id;
+            // dd($id);
+            $content = $name.'登录成功';
+
+            insertlog($id,'登录','后台登录',$content);
+            //============操作日志结束=============
             //跳转到后台首页
             return redirect('admin/demo2');
 

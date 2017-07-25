@@ -314,3 +314,19 @@ response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
     <statusMsg>【账号】主账户绑定的测试号码个数为零</statusMsg>
 </Response>
 
+request body = <TemplateSMS>
+                    <to>15605388820</to>
+                    <appId>8a216da85d158d1b015d4f0724d61608</appId>
+                    <templateId>1</templateId>
+                    <datas><data>627225</data><data>60</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da85d158d1b015d4f07248f1604/SMS/TemplateSMS?sig=5D2C8B89DB00420FAE4756BF80E53128
+response body = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Response>
+    <statusCode>000000</statusCode>
+    <TemplateSMS>
+        <smsMessageSid>c1c75b4ed9bc4d30ba634bc0c9dfcb84</smsMessageSid>
+        <dateCreated>20170723203959</dateCreated>
+    </TemplateSMS>
+</Response>
+
